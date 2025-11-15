@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: bloomberg-fx-postgres
+    environment:
+      POSTGRES_DB: fxdeals
+      POSTGRES_USER: fxuser
+      POSTGRES_PASSWORD: fxpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fxuser -d fxdeals"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - fx-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bloomberg-fx-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/fxdeals
+      SPRING_DATASOURCE_USERNAME: fxuser
+      SPRING_DATASOURCE_PASSWORD: fxpassword
+    ports:
+      - "8080:8080"
+    networks:
+      - fx-network
+
+volumes:
+  postgres-data:
+
+networks:
+  fx-network:
+    driver: bridge
