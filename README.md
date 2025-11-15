@@ -278,7 +278,8 @@ GET /api/deals/unique/{dealUniqueId}
 - **Builder Pattern**: Clean object construction (Lombok `@Builder`)
 - **Strategy Pattern**: Validation strategy separation
 - **Exception Handling Pattern**: Centralized error handling
-
+- **Separation of Concerns**.
+ 
 ---
 
 ## 🧪 Testing Strategy
