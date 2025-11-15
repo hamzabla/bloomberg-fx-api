@@ -87,7 +87,7 @@ k6 version
 ### Quick Start with Make
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/hamzabla/bloomberg-fx-api.git
 cd bloomberg-fx-api
 
 # View all available commands
