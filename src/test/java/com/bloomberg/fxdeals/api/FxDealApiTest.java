@@ -2,6 +2,7 @@ package com.bloomberg.fxdeals.api;
 
 import com.bloomberg.fxdeals.dto.FxDealRequest;
 import com.bloomberg.fxdeals.repository.FxDealRepository;
+import com.bloomberg.fxdeals.integration.AbstractIntegrationTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +24,7 @@ import static org.hamcrest.Matchers.*;
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
-class FxDealApiTest {
+class FxDealApiTest extends AbstractIntegrationTest {
 
     @LocalServerPort
     private int port;
